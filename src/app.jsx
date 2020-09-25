@@ -88,7 +88,7 @@ class App extends Component {
   
   render() {
     return(
-      <div className={(this.state.city !== 'undefined') ? ((this.state.temp_max > 22) ? 'app warm' : 'app') : 'app'}>
+      <div className={(this.state.city !== 'undefined') ? ((this.state.celsius > 22) ? 'app warm' : 'app') : 'app'}>
         <main>
           <Form loadWeather={this.getWeather} error={this.state.error}/>
           <Weather 
