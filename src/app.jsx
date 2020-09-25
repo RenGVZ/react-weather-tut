@@ -15,8 +15,6 @@ class App extends Component {
       icon: undefined,
       main: undefined,
       celsius: undefined,
-      temp_max: undefined,
-      temp_min: undefined,
       description: "",
       error: false
     };
@@ -32,10 +30,10 @@ class App extends Component {
     }
   }
 
-  calcCelsius(temp) {
-    let cel = Math.floor(temp - 273.15);
-    return cel
-  }
+  // calcCelsius(temp) {
+  //   let cel = Math.floor(temp - 273.15);
+  //   return cel
+  // }
 
   getWeatherIcon(icons, rangeId){
     switch(true){
@@ -71,16 +69,14 @@ class App extends Component {
     const city = e.target.elements.city.value;
 
     if(city) {
-      const apiCall = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`);
+      const apiCall = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`);
       const response = await apiCall.json();
       console.log(response);
       this.setState({ 
         city: `${response.name}`,
         country: response.sys.country,
         weather: response.weather,
-        celsius: this.calcCelsius(response.main.temp),
-        temp_max: this.calcCelsius(response.main.temp_max),
-        temp_min: this.calcCelsius(response.main.temp_min),
+        celsius: (Math.round(response.main.temp)),
         description: response.weather[0].main,
         error: false
       });
@@ -92,7 +88,7 @@ class App extends Component {
   
   render() {
     return(
-      <div className={(this.state.city != 'undefined') ? ((this.state.temp_max > 22) ? 'app warm' : 'app') : 'app'}>
+      <div className={(this.state.city !== 'undefined') ? ((this.state.temp_max > 22) ? 'app warm' : 'app') : 'app'}>
         <main>
           <Form loadWeather={this.getWeather} error={this.state.error}/>
           <Weather 
@@ -102,8 +98,6 @@ class App extends Component {
             celsius={this.state.celsius} 
             weatherIcon={this.state.icon} 
             main={this.state.main}
-            temp_max={this.state.temp_max}
-            temp_min={this.state.temp_min}
             description={this.state.description}
           />
         </main>

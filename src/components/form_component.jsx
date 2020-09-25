@@ -10,7 +10,7 @@ const Form = props => {
           className="form-control" 
           name="city" 
           autoComplete="off"
-          placeholder="Type a city..."
+          placeholder="Type a city name..."
         />
         <button className="btn btn-warning mt-4">Get Weather</button>
       </form>
