@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'weather-icons/css/weather-icons.css'
 import Weather from './components/weather_component';
@@ -83,7 +81,7 @@ class App extends Component {
         celsius: this.calcCelsius(response.main.temp),
         temp_max: this.calcCelsius(response.main.temp_max),
         temp_min: this.calcCelsius(response.main.temp_min),
-        description: response.weather[0].description,
+        description: response.weather[0].main,
         error: false
       });
       this.getWeatherIcon(this.weatherIcon, response.weather[0].id)
@@ -94,18 +92,21 @@ class App extends Component {
   
   render() {
     return(
-      <div className="App">
-        <Form loadWeather={this.getWeather} error={this.state.error}/>
-        <Weather 
-          city={this.state.city} 
-          country={this.state.country}
-          celsius={this.state.celsius} 
-          weatherIcon={this.state.icon} 
-          main={this.state.main}
-          temp_max={this.state.temp_max}
-          temp_min={this.state.temp_min}
-          description={this.state.description}
-        />
+      <div className={(this.state.city != 'undefined') ? ((this.state.temp_max > 22) ? 'app warm' : 'app') : 'app'}>
+        <main>
+          <Form loadWeather={this.getWeather} error={this.state.error}/>
+          <Weather 
+            weather={this.state.weather}
+            city={this.state.city} 
+            country={this.state.country}
+            celsius={this.state.celsius} 
+            weatherIcon={this.state.icon} 
+            main={this.state.main}
+            temp_max={this.state.temp_max}
+            temp_min={this.state.temp_min}
+            description={this.state.description}
+          />
+        </main>
       </div>
     );
   }
