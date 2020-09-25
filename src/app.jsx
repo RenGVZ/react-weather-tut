@@ -69,7 +69,7 @@ class App extends Component {
     const city = e.target.elements.city.value;
 
     if(city) {
-      const apiCall = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`);
+      const apiCall = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`);
       const response = await apiCall.json();
       console.log(response);
       this.setState({ 
