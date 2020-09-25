@@ -4,6 +4,7 @@ import 'weather-icons/css/weather-icons.css'
 import Weather from './components/weather_component';
 import key from './key';
 import Form from './components/form_component';
+import Footer from './components/footer_component';
 
 class App extends Component {
   constructor(){
@@ -100,6 +101,7 @@ class App extends Component {
             main={this.state.main}
             description={this.state.description}
           />
+          {/* <Footer /> */}
         </main>
       </div>
     );
